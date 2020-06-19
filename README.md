@@ -1,4 +1,4 @@
-# An Optimal Benchmark to Estimate the Robustness of Image Classifier
+# An Optimal Benchmark to Estimate the Robustness of Image Classifiers
 We propose a benchmark that evaluates the robustness of image classifiers towards the seven major kinds of commonly encountered corruptions.
 <img align="center" src="illustrations/Optimal_Bench.png" width="900">
 
@@ -9,8 +9,8 @@ pandas 1.0
 
 ## How to Use the Benchmark
 We provide a basic example on how to estimate the robustness of an ImageNet classifier with the benchmark.
-This code can be adapted to your need by using your own test set and your own classifier constructor.
-The test can be launched with the following command:
+This code can be adapted to your own test set and your own classifier constructor.
+The basic example can be launched with the following command:
 `python3 get_mCE.py PATH_TO_THE_TEST_SET_FOLDER`
 
 We use the mean CE metric to evaluate the robustness of neural networks.
