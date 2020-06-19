@@ -1,13 +1,13 @@
-#An Optimal Benchmark to Estimate the Robustness of Image Classifier
+# An Optimal Benchmark to Estimate the Robustness of Image Classifier
 We propose a benchmark that evaluates the robustness of image classifiers towards the seven major kinds of commonly encountered corruptions.
 <img align="center" src="illustrations/Optimal_Bench.png" width="900">
 
-##Requirements
+## Requirements
 Pytorch 1.5
 scipy 1.4
 pandas 1.0
 
-##How to Use the Benchmark
+## How to Use the Benchmark
 We provide a basic example on how to estimate the robustness of an ImageNet classifier with the benchmark.
 This code can be adapted to your need by using your own test set and your own classifier constructor.
 The test can be launched with the following command:
@@ -22,7 +22,7 @@ All the corruptions can be used in any other testing procedure that uses a pytor
 Then, the corruptions can be used in a preprocessing chain `torchvision.transforms.Compose` as shown in the following code line:
 `torchvision.transforms.Compose([torchvision.transforms.ToTensor(),CC_Transform(corruption_amount,name_of_the_corruption)])`
 
-##Additional Corruptions
+## Additional Corruptions
 In addition to the corruptions provided in the optimal benchmark, we implemented some additional corruptions that are displayed below.
 These corruptions are accessible in the file CC_Transform.py.
 <img align="center" src="illustrations/Implemented_Corruptions.png" width="900">
