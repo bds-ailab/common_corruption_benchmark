@@ -1,4 +1,4 @@
-##Increasing the Coverage and Balance of Benchmarks by Using Non-Overlapping Corruptions##
+#Increasing the Coverage and Balance of Benchmarks by Using Non-Overlapping Corruptions#
 This repository contains the code associated with the paper entitled [Increasing the Coverage and Balance of Benchmarks by Using Non-Overlapping Corruptions](https://linktothepaper)
 In this paper a new benchmark called NOCS is proposed. This benchmark evaluates the robustness of image classifiers towards common corruptions.
 NOCS is based on eight image transformations that have been chosen to cover a very large range of diverse common corruptions. Here is the illustration of the NOCS corruptions:
