@@ -18,9 +18,6 @@ class CC_Transform():
 
     def __call__(self,image):
         chosen_corruption = self.corruption_kind
-        if chosen_corruption == "random":
-            indice = randint(0,len(self.amount.keys())-1)
-            chosen_corruption = list(self.amount.keys())[indice]
 
         if chosen_corruption == "none":
             return image
@@ -122,9 +119,10 @@ class CC_Transform():
             if self.amount["border"][0] == 0:
                 return image
             corrupted_image = image
+            chosen_gray = random()
             border_thickness = randint(self.amount["border"][0], self.amount["border"][1])
             for i in range(border_thickness):
-                corrupted_image[:,i,:] = corrupted_image[:,:,i] = corrupted_image[:,:,image.shape[2]-(i+1)] = corrupted_image[:,image.shape[1]-(i+1),:] = 0.5
+                corrupted_image[:,i,:] = corrupted_image[:,:,i] = corrupted_image[:,:,image.shape[2]-(i+1)] = corrupted_image[:,image.shape[1]-(i+1),:] = chosen_gray
             return corrupted_image
 
         elif chosen_corruption == "rhombus":
@@ -262,11 +260,11 @@ class CC_Transform():
                 corrupted_image = torch.nn.functional.upsample_nearest(corrupted_image.permute(0,2,1), scale_factor=amount)
             return corrupted_image
 
-        elif chosen_corruption == "low_res" :
-            if self.amount["low_res"][0] == 0:
+        elif chosen_corruption == "thumbnail_resize" :
+            if self.amount["thumbnail_resize"][0] == 0:
                 return image
             height,width = image.shape[1], image.shape[2]
-            resize_factor = torch.zeros([1]).uniform_(self.amount["low_res"][0],self.amount["low_res"][1])
+            resize_factor = torch.zeros([1]).uniform_(self.amount["thumbnail_resize"][0],self.amount["thumbnail_resize"][1])
             image = transforms.functional.to_pil_image(image,mode="RGB")
             corrupted_image = transforms.functional.resize(image, [int(height/resize_factor),int(width/resize_factor)])
             corrupted_image = transforms.functional.resize(corrupted_image, [height, width])

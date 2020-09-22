@@ -1,5 +1,5 @@
 # Copyright 2020 BULL SAS All rights reserved #
-# Use the corruptions of the benchmark to get the mCE score of a model #
+# Get the ImageNet-NOC CE scores of a model#
 
 import torch
 import numpy as np
@@ -13,13 +13,13 @@ import CC_Transform
 from settings import corruption_amount
 from settings import ref_error
 
-# Define the corruptions used for the test. Other corruptions from the CC_Transform file can be used
+# Define the corruptions used for the test. Not only the ImageNet-NOC corruptions can be used: other corruptions from the CC_Transform file can be used.
 list_corruption_bench = ["blur","rotation","brightness","rhombus","quantization","obstruction","hue"]
 list_corruption_bench = ["none"] + list_corruption_bench
 
-# Parameters that can be adapted to your experiment
+# Parameters that can be adapted to a specific experiment
 image_height, image_width = 224,224
-batch_size = 50
+batch_size = 100
 num_workers = 16
 device = torch.device("cuda:0".format(0))
 
@@ -38,7 +38,7 @@ for k in range(len(list_corruption_bench)):
 
     # Prepare the dataloader for the considered corruption. The validation set can be replaced with your own test set
     # The used corruption functions require the input images to be float tensors with pixel values in the range [0-1] and color channels in the RGB format
-    pre_transform = torchvision.transforms.Compose([torchvision.transforms.Resize(256),torchvision.transforms.CenterCrop(224),torchvision.transforms.ToTensor(),CC_Transform.CC_Transform(corruption_amount,list_corruption_bench[k]), torchvision.transforms.Normalize(mean=[0.485, 0.456, 0.406],std=[0.229, 0.224, 0.225])])
+    pre_transform = torchvision.transforms.Compose([torchvision.transforms.Resize(256),torchvision.transforms.CenterCrop(224),torchvision.transforms.ToTensor(), torchvision.transforms.Normalize(mean=[0.485, 0.456, 0.406],std=[0.229, 0.224, 0.225]),CC_Transform.CC_Transform(corruption_amount,list_corruption_bench[k])])
     test_set =  torchvision.datasets.ImageFolder(dataset_path, transform=pre_transform)
     test_loader = torch.utils.data.DataLoader(test_set, batch_size=batch_size, num_workers=num_workers, drop_last=True)
     epoch_test_size = len(test_set)//batch_size
