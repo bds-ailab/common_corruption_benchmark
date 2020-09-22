@@ -1,30 +1,37 @@
-# An Optimal Benchmark to Estimate the Robustness of Image Classifiers
-We propose a benchmark that evaluates the robustness of image classifiers towards the seven major kinds of commonly encountered corruptions.
-<img align="center" src="illustrations/Optimal_Bench.png" width="900">
+#Increasing the Coverage and Balance of Benchmarks by Using Non-Overlapping Corruptions#
+This repository contains the code associated with the paper entitled [Increasing the Coverage and Balance of Benchmarks by Using Non-Overlapping Corruptions](https://linktothepaper)
+In this paper a new benchmark called NOCS is proposed. This benchmark evaluates the robustness of image classifiers towards common corruptions.
+NOCS is based on eight image transformations that have been chosen to cover a very large range of diverse common corruptions. Here is the illustration of the NOCS corruptions:
+<img align="center" src="ImageNet_NOC_illustration.png" width="900">
 
-## Requirements
+##Requirements##
 Pytorch 1.5
-
 scipy 1.4
-
 pandas 1.0
 
-## How to Use the Benchmark
-We provide a basic example on how to estimate the robustness of an ImageNet classifier with the benchmark.
-This code can be adapted to your own test set and your own classifier constructor.
-The basic example can be launched with the following command:
-`python3 get_mCE.py PATH_TO_THE_TEST_SET_FOLDER`
+##Test the Robustness of a Model to NOCS##
+To get the NOCS CE scores of a standard pretrained ResNet-50, launch the following command:
+`python3 get_mCE.py PATH_TO_THE_VAL_SET_FOLDER`
+With PATH_TO_THE_VAL_SET_FOLDER the path to the ImageNet validation set.
+The code can be adapted to load your own model instead of a standard ResNet-50.
 
-We use the mean CE metric to evaluate the robustness of neural networks.
-The more the CE scores are close to 0 the more the tested models are robust.
-A CE score of 100 means that the tested model is as robust as the pretrained pytorch resnet-50 towards the considered common corruption.
-Additional information about the mCE metric can be found [here](https://arxiv.org/pdf/1903.12261.pdf).
 
-All the corruptions can be used in any other testing procedure that uses a pytorch dataloader.
-Then, the corruptions can be used in a preprocessing chain `torchvision.transforms.Compose` as shown in the following code line:
-`torchvision.transforms.Compose([torchvision.transforms.ToTensor(),CC_Transform(corruption_amount,name_of_the_corruption)])`
+##Performances of Various Models to NOCS##
+We provide the NOCS CE scores of several pretrained torchvision models.
+| Model | mCE     |
+| :------------- | :------------- |
+| AlexNet       | 100       |
+| :------------- | :------------- |
+| SqueezeNet      | 106       |
 
-## Additional Corruptions
-In addition to the corruptions provided in the optimal benchmark, we implemented some additional corruptions that are displayed below.
-These corruptions are accessible in the file CC_Transform.py.
-<img align="center" src="illustrations/Implemented_Corruptions.png" width="900">
+| Model     | Paper    | mCE   |
+| :------------- | :------------- | :------------- |
+| Item One       | Item Two       | Item Three     |
+
+## Citation
+    @article{bibkey:laugros2020inoc,
+      title={},
+      author={},
+      journal={},
+      year={}
+    }
