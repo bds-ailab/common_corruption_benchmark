@@ -20,17 +20,12 @@ The code can be adapted to load your own model instead of a standard ResNet-50.<
 
 
 ## Performances of Various Models to NOCS
-We provide the NOCS CE scores of several pretrained torchvision models.
-
-| Model | mCE     |
-| :------------- | :------------- |
-| AlexNet       | 100       |
-| :------------- | :------------- |
-| SqueezeNet      | 106       |
+We provide the NOCS CE scores of the pretrained torchvision ResNet-50.
+Submit a pull request if you want to display the robustness of your model to NOCS. Your model should have a ResNet-50 architecture to be compared to the other models displayed in this array <br/>
 
 | Model     | Paper    | mCE   |
 | :------------- | :------------- | :------------- |
-| Item One       | Item Two       | Item Three     |
+| Standard ResNet-50       |        | 81     |
 
 ## Citation
 
