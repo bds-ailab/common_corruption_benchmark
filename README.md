@@ -1,5 +1,5 @@
-# Increasing the Coverage and Balance of Robustness Benchmarks by Using Non-Overlapping Corruptions
-This repository contains the code associated with the paper entitled [Increasing the Coverage and Balance of Robustness Benchmarks by Using Non-Overlapping Corruptions](https://linktothepaper)
+# A Benchmark of Non-Overlapping Corruptions
+This repository contains the code associated with the paper entitled [A Benchmark of Non-Overlapping Corruptions](https://linktothepaper)
 In this paper, a new benchmark of Non-Overlapping Corruptions called ImageNet-NOC is proposed. This benchmark evaluates the robustness of image classifiers towards common corruptions.
 ImageNet-NOC is based on eight image transformations that have been chosen to cover a very large range of common corruptions. Here is an illustration of the ImageNet-NOC corruptions:<br/>
 
