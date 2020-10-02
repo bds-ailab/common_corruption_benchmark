@@ -29,6 +29,7 @@ corruption_amount["circle"] = [7,50]
 corruption_amount["arlequin"] = [3,36]
 
 # Error rates of the torchvision pretrained ResNet50, on the ImageNet validation set corrupted with the proposed common corruptions
+ref_error = {}
 ref_error["none"] = 0.435
 ref_error["quantization"] =  0.592
 ref_error["gaussian"] = 0.620

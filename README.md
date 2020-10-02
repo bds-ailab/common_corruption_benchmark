@@ -6,6 +6,7 @@ NOCS is based on eight image transformations that have been chosen to cover a ve
 
 <img align="center" src="illustrations/benchmark_illustration.png" width="700">
 
+If you have any question about the benchmark, do not hesitate to contact us at alfred.laugros@atos.net.
 
 ## Requirements
 Pytorch 1.5<br/>
@@ -21,7 +22,7 @@ The code can be adapted to load your own model instead of a standard ResNet-50.<
 
 ## Performances of Various Models to NOCS
 We provide the NOCS CE scores of the pretrained torchvision ResNet-50.<br/>
-Submit a pull request if you want to display the robustness of your model to NOCS. Your model should have a ResNet-50 architecture to be compared to the other models displayed in this array <br/>
+Submit a pull request if you want to display the robustness of your model to NOCS. Your model should have a ResNet-50 architecture to be compared to the other models displayed in this array. <br/>
 
 | Model     | Paper    | mCE   |
 | :------------- | :------------- | :------------- |

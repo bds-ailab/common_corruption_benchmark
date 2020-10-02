@@ -1,4 +1,6 @@
 # Copyright 2020 BULL SAS All rights reserved #
+# Implementations of the modeled common corruptions
+# Pixel values of input images should be in the range [0-1] and in RGB channel format
 
 from torchvision import transforms
 import torch
@@ -7,7 +9,6 @@ import numpy as np
 import os
 from operator import add
 
-# Pixel values of input images should be in the range [0-1] and RGB
 class CC_Transform():
     def __init__(self,amount,corruption_kind):
         self.amount=amount
@@ -141,25 +142,6 @@ class CC_Transform():
                 places = torch.tensor(places)
                 # corrupted_image[:,places[:,0],places[:,1]] = chosen_color
                 corrupted_image[:,places[:,0],places[:,1]] = random()
-            return corrupted_image
-
-        elif chosen_corruption == "arlequin":
-            if self.amount["arlequin"][0] == 0:
-                return image
-            rhombus_size = 7
-            nb_rhombus = randint(self.amount["arlequin"][0], self.amount["arlequin"][1])
-            corrupted_image = image.clone().detach()
-            chosen_color1, chosen_color2, chosen_color0 = random(), random(), random()
-            for r in range(nb_rhombus):
-                places = [[randint(rhombus_size,image.shape[1]-rhombus_size),randint(rhombus_size,image.shape[2]-rhombus_size)]]
-                for i in range(-rhombus_size,rhombus_size):
-                    for k in range(-(rhombus_size-abs(i)),rhombus_size-abs(i)):
-                        if (i!=0) or (k!=0) :
-                            places.append(list( map(add, places[0], [i,k])))
-                places = torch.tensor(places)
-                corrupted_image[0,places[:,0],places[:,1]] = chosen_color0
-                corrupted_image[1,places[:,0],places[:,1]] = chosen_color1
-                corrupted_image[2,places[:,0],places[:,1]] = chosen_color2
             return corrupted_image
 
         elif chosen_corruption == "circle":
