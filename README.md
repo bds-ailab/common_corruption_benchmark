@@ -18,7 +18,9 @@ Seaborn 0.11
 
 ## Test the Robustness of a Model to ImageNet-NOC
 To get the ImageNet-NOC CE scores of the torchvision pretrained ResNet-50, launch the following command:<br/>
-`python3 get_mCE.py PATH_TO_THE_VAL_SET_FOLDER`<br/>
+```
+python3 get_mCE.py PATH_TO_THE_VAL_SET_FOLDER
+```
 With PATH_TO_THE_VAL_SET_FOLDER the path to the ImageNet validation set.<br/>
 The code can be adapted to load your own model instead of the torchvision ResNet-50.<br/>
 
@@ -34,16 +36,22 @@ Submit a pull request if you want to display the robustness of your own model to
 We provide the code used to compute the overlapping scores between several corruptions.<br/>
 In the CC_Transform file, we provide the modelings of twenty-three common corruptions.<br/>
 To train twenty-three models, each trained using a data augmentation with one of these modeled common corruption, launch:<br/>
-`python3 train.py PATH_TO_THE_VAL_SET_FOLDER`<br/>
+```
+python3 train.py PATH_TO_THE_VAL_SET_FOLDER
+```
 
 The default neural network architecture used is a ResNet-18. The results found in our [paper](https://linktothepaper) are computed using this architecture and the ImageNet subset: ImageNet-100.<br/>
 The weights of the trained models are saved in the "saved_models" folder.<br/>
 To obtain the accuracy of each trained model, on the twenty-three ImageNet validation sets that are each corrupted with one corruption of CC_Transform, use the following command:<br/>
-`python3 get_accuracy.py PATH_TO_THE_VAL_SET_FOLDER`<br/>
+```
+python3 get_accuracy.py PATH_TO_THE_VAL_SET_FOLDER
+```
 
 The values of the computed accuracies are saved in the "results" folder.<br/>
 Use the computed accuracies to obtain the overlapping scores between all the modeled corruptions with:<br/>
-`python3 get_overlappings.py`<br/>
+```
+python3 get_overlappings.py
+```
 
 The computed overlapping scores are saved in the 'results' folder.<br/>
 
