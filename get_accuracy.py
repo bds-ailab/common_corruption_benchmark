@@ -64,3 +64,4 @@ for i in range(len(list_models)):
 res_array = pandas.DataFrame(res_array, index=list_models, columns=corruption_list)
 res_array.to_pickle('results/corruption_accuracy_array.pkl')
 res_array.to_html('results/corruption_accuracy_array.html')
+print("Results have been saved in the \'results\' folder")

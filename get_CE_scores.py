@@ -67,4 +67,4 @@ res_array[0,k+1] = (mCE/(len(list_corruption_bench)-1))
 # Save the resutls into an html file
 res_array = pandas.DataFrame(res_array, index=["tested_model"], columns=list_corruption_bench + ["mCE"])
 res_array.to_html('CE_array.html')
-print("Results have been saved in an html file")
+print("Results have been saved in the \'results\' folder")

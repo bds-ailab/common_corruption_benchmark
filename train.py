@@ -87,6 +87,6 @@ for corruption in corruption_list:
             cur_learning_rate = cur_learning_rate*decay_rate
             optim = torch.optim.SGD(classifier.parameters(), lr=cur_learning_rate, weight_decay=1e-4, momentum=0.9)
         if num_epoch==40 :
-            print("End of training, the model is saved")
+            print("End of training, the model is saved in the \'saved_models\' folder")
             torch.save(classifier.cpu().state_dict(),os.path.join(model_save_path,corruption))
             break
