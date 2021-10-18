@@ -42,7 +42,7 @@ The code is split into 4 folders:
 4) Results : directory that stores the output of the scripts contained in the three folders mentioned above.
 Files in the root directory are shared by the scripts of these four folders.
 
-## Replicating Results of the Paper
+## Process Followed to Get the Results of the Paper
 
 **I] Get the overlapping matrix**
 
