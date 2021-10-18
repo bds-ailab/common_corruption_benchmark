@@ -1,59 +1,112 @@
-# A Benchmark of Non-Overlapping Corruptions
-This repository contains the code associated with the paper entitled [A Benchmark of Non-Overlapping Corruptions](https://github.com/bds-ailab/common_corruption_benchmark).
-In this paper, a new benchmark of Non-Overlapping Corruptions called ImageNet-NOC is proposed. This benchmark evaluates the robustness of image classifiers towards common corruptions.
-ImageNet-NOC is based on eight image transformations that have been chosen to cover a very large range of common corruptions. Here is an illustration of the ImageNet-NOC corruptions:<br/>
+# Using Synthetic Corruptions to Measure Robustness to Natural Distribution Shifts
+This repository contains the code associated with the paper entitled "Using Synthetic Corruptions to Measure Robustness to Natural Distribution Shifts"
 
-<img align="center" src="illustrations/benchmark_illustration.png" width="900">
+# Modules Used
+pytorch: 1.7.1
+albumentations: 0.5.2
+sklearn: 0.24.1
+seaborn: 0.11.1
+pandas: 1.1.5
+OpenCV: 4.5.1
+scipy: 1.5.4
+torchvision: 0.8.2
+matplotlib: 3.3.4
 
-## Requirements
-Pytorch 1.5
+## Datasets Used
+ImageNet-A: https://github.com/hendrycks/natural-adv-examples
+ImageNet-R: https://github.com/hendrycks/imagenet-r/
+ImageNet-V2: https://github.com/modestyachts/ImageNetV2
+ImageNet-P: https://github.com/hendrycks/robustness
+ImageNet-C: https://github.com/hendrycks/robustness
+ObjectNet: https://objectnet.dev/
+ImageNet-Sketch: https://www.kaggle.com/wanghaohan/imagenetsketch
 
-Scipy 1.4
+## Code Structure
+The code is split into 4 folders:
+1) get_corruption_cat : code used to get the overlapping matrix displayed in Figure 2
+2) generate_bench : code used to generate benchmarks (implementation of Algorithm 1 and the substitution operation)
+3) benchmark_correlations : code used to estimate the correlations in terms of robustness between benchmarks. It is used to get the results displayed in Table 2 and 3.
+4) Results : directory that stores the output of the scripts contained in the three folders mentioned above.
+Files in the root directory are shared by the scripts of these four folders.
 
-Pandas 1.0
+## Replicating The Results
 
-Seaborn 0.11
+1) Get the overlapping matrix <br/>
+Navigate to the get_corruption_cat directory.
 
-## Estimate the Common Corruption Robustness of a Model with ImageNet-NOC
-To get the ImageNet-NOC CE scores of the torchvision pretrained ResNet-50, launch the following command:<br/>
+To train the models required to get the overlapping scores launch:
 ```
-python3 get_mCE.py PATH_TO_THE_VAL_SET_FOLDER
-```
-With PATH_TO_THE_VAL_SET_FOLDER the path to the ImageNet validation set.<br/>
-A few code lines can be changed to load your own model instead of the torchvision ResNet-50.<br/>
-
-## Robustness Landmarks
-We provide the ImageNet-NOC mCE score of the pretrained torchvision ResNet-50.<br/>
-Submit a pull request if you want to display the robustness of your own model to ImageNet-NOC. Your model must have a ResNet-50 architecture to be compared to the other models displayed in the array <br/>
-
-| Model     | Paper    | mCE   |
-| :------------- | :------------- | :------------- |
-| Standard ResNet-50       |        | 81     |
-
-## Compute the Overlapping Scores between a Group of Corruptions
-We provide the code used to compute the overlapping scores between several corruptions.<br/>
-In the CC_Transform file, we provide the modelings of twenty-three common corruptions.<br/>
-To train one model with data augmentation, for each of the modeled corruptions, launch:<br/>
-```
-python3 train.py PATH_TO_THE_VAL_SET_FOLDER
-```
-
-The default neural network architecture used is a ResNet-18. The results found in our [paper](https://github.com/bds-ailab/common_corruption_benchmark) are computed using this architecture and the ImageNet subset: ImageNet-100.<br/>
-The weights of the trained models are saved in the "saved_models" folder.<br/>
-To get the accuracies of each trained model, computed with the twenty-three ImageNet validation sets that are each corrupted with one corruption of the CC_Transform file, use the following command:<br/>
-```
-python3 get_accuracy.py PATH_TO_THE_VAL_SET_FOLDER
+python3 corruption_trainings.py '/path/to/ImageNet-100/' all_candidates
 ```
 
-The values of the computed accuracies are saved in the "results" folder.<br/>
-Use the computed accuracies to obtain the overlapping scores between all the modeled corruptions with:<br/>
+To compute the accuracies required to get the overlapping scores using the models trained above launch:
 ```
-python3 get_overlappings.py
+python3 get_candiate_acc.py '/path/to/ImageNet-100/' all_candidates
 ```
 
-The computed overlapping scores are saved in the 'results' folder.<br/>
+To get the overlapping matrix using the accuracies obtained with the previous command launch:
+```
+python3 get_overlapping_matrix.py
+```
+
+The corruption categories are then obtained with :
+```
+python3 get_corruption_clusters.py
+```
+
+
+2) Get the synthetic corruption benchmarks <br/>
+Navigate to the generate_bench directory
+
+Generate 1000 different benchmarks with n=6 corruption categories represented and k=2 corruptions per represented category using the following command:
+```
+python3 generate_n_k_bench.py 6 2 1000
+```
+(any n,k values can be used)
+
+To substitute corruptions in the benchmarks generated using n=6,k=2 to get benchmarks with non-zero std, enter:
+```
+python3 get_non_zero_std_bench.py 6 2
+```
+(any n,k values can be used)
+
+3) Obtain the correlations in terms of robustness between benchmarks <br/>
+Navigate to the benchmark_correlations directory
+
+In the script entitled 'get_models_accuracies.sh' replace the path of the natural and synthetic corruption benchmarks with their location in your environment.
+Do the same for the path containing the checkpoints of the used trained models (models of Table 1)
+Then get the accuracies of the robust models and their plain counterparts on the natural and synthetic corruption benchmarks with:
+```
+./get_models_accuracies.sh
+```
+
+Use the computed accuracies to get the correlations in terms of robustness between the synthetic corruption benchmarks (ImageNet-P, ImageNet-C) and natural corruption benchmarks, using the following command:
+```
+python3 get_existing_bench_correlations.py
+```
+
+The correlations in terms of robustness between natural corruption benchmarks and any generated benchmarks (here n=6, k=2 and std=1.5) can be obtained using:
+```
+python3 get_generated_nat_bench_correlations.py 6 2 1.5
+```
 
 ## Citation
-Paper under review.
-
-If you have any question about the benchmark, do not hesitate to contact us at alfred.laugros@atos.net.<br/>
+"""
+@article{DBLP:journals/corr/abs-2107-12052,
+  author    = {Alfred Laugros and
+               Alice Caplier and
+               Matthieu Ospici},
+  title     = {Using Synthetic Corruptions to Measure Robustness to Natural Distribution
+               Shifts},
+  journal   = {CoRR},
+  volume    = {abs/2107.12052},
+  year      = {2021},
+  url       = {https://arxiv.org/abs/2107.12052},
+  eprinttype = {arXiv},
+  eprint    = {2107.12052},
+  timestamp = {Thu, 29 Jul 2021 16:14:15 +0200},
+  biburl    = {https://dblp.org/rec/journals/corr/abs-2107-12052.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+"""
+If you have any question, do not hesitate to contact us at alfred.laugros@atos.net.<br/>
