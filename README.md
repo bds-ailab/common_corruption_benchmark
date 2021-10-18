@@ -1,4 +1,4 @@
-This repository contains the code associated with the paper entitled "Using Synthetic Corruptions to Measure Robustness to Natural Distribution Shifts". The paper is available [here](https://arxiv.org/abs/2107.12052).
+This repository contains the code associated with the paper entitled "Using Synthetic Corruptions to Measure Robustness to Natural Distribution Shifts", which is available [here](https://arxiv.org/abs/2107.12052).
 
 # Modules Used
 pytorch: 1.7.1
@@ -36,8 +36,8 @@ ImageNet-Sketch: https://www.kaggle.com/wanghaohan/imagenetsketch
 
 ## Code Structure
 The code is split into 4 folders:
-1) get_corruption_cat : code used to get the overlapping matrix displayed in Figure 2
-2) generate_bench : code used to generate benchmarks (implementation of Algorithm 1 and the substitution operation)
+1) get_corruption_cat : code used to get the overlapping matrix displayed in Figure 2.
+2) generate_bench : code used to generate benchmarks (implementation of Algorithm 1 and the substitution operation).
 3) benchmark_correlations : code used to estimate the correlations in terms of robustness between benchmarks. It is used to get the results displayed in Table 2 and 3.
 4) Results : directory that stores the output of the scripts contained in the three folders mentioned above.
 Files in the root directory are shared by the scripts of these four folders.
@@ -121,8 +121,6 @@ python3 get_generated_nat_bench_correlations.py 6 2 1.5
 >  volume    = {abs/2107.12052},
 >
 >  year      = {2021},
->
->  url       = {https://arxiv.org/abs/2107.12052}
 >}
 
 If you have any question, do not hesitate to contact us at alfred.laugros@atos.net.<br/>
