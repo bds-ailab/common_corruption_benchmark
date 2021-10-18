@@ -1,5 +1,4 @@
-# Using Synthetic Corruptions to Measure Robustness to Natural Distribution Shifts
-This repository contains the code associated with the paper entitled "Using Synthetic Corruptions to Measure Robustness to Natural Distribution Shifts"
+This repository contains the code associated with the paper entitled "Using Synthetic Corruptions to Measure Robustness to Natural Distribution Shifts". The paper is available [here](https://arxiv.org/abs/2107.12052).
 
 # Modules Used
 pytorch: 1.7.1
@@ -43,9 +42,10 @@ The code is split into 4 folders:
 4) Results : directory that stores the output of the scripts contained in the three folders mentioned above.
 Files in the root directory are shared by the scripts of these four folders.
 
-## Replicating The Results
+## Replicating Results of the Paper
 
 **I] Get the overlapping matrix**
+
 Navigate to the get_corruption_cat directory.
 
 To train the models required to get the overlapping scores launch:
@@ -70,6 +70,7 @@ python3 get_corruption_clusters.py
 
 
 **II] Get the synthetic corruption benchmarks**
+
 Navigate to the generate_bench directory
 
 Generate 1000 different benchmarks with n=6 corruption categories represented and k=2 corruptions per represented category using the following command:
@@ -85,6 +86,7 @@ python3 get_non_zero_std_bench.py 6 2
 (any n,k values can be used)
 
 **III] Obtain the correlations in terms of robustness between benchmarks**
+
 Navigate to the benchmark_correlations directory
 
 In the script entitled 'get_models_accuracies.sh' replace the path of the natural and synthetic corruption benchmarks with their location in your environment.
@@ -109,14 +111,17 @@ python3 get_generated_nat_bench_correlations.py 6 2 1.5
 ## Citation
 
 >@article{DBLP:journals/corr/abs-2107-12052,
->  author    = {Alfred Laugros and
->               Alice Caplier and
->               Matthieu Ospici},
->  title     = {Using Synthetic Corruptions to Measure Robustness to Natural Distribution
->               Shifts},
+>
+>  author    = {Alfred Laugros and Alice Caplier and Matthieu Ospici},
+>
+>  title     = {Using Synthetic Corruptions to Measure Robustness to Natural Distribution Shifts},
+>
 >  journal   = {CoRR},
+>
 >  volume    = {abs/2107.12052},
+>
 >  year      = {2021},
+>
 >  url       = {https://arxiv.org/abs/2107.12052}
 >}
 
