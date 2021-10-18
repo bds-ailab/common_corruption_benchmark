@@ -1,6 +1,6 @@
 This repository contains the code associated with the paper entitled "Using Synthetic Corruptions to Measure Robustness to Natural Distribution Shifts", which is available [here](https://arxiv.org/abs/2107.12052).
 
-# Modules Used
+## Modules Used
 pytorch: 1.7.1
 
 albumentations: 0.5.2
@@ -42,7 +42,7 @@ The code is split into 4 folders:
 4) Results : directory that stores the output of the scripts contained in the three folders mentioned above.
 Files in the root directory are shared by the scripts of these four folders.
 
-## Process Followed to Get the Results of the Paper
+## Process Followed to Get the Paper Results
 
 **I] Get the overlapping matrix**
 
