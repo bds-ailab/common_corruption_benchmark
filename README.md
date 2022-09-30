@@ -122,3 +122,8 @@ python3 get_generated_nat_bench_correlations.py 6 2 1.5
 >}
 
 If you have any question, do not hesitate to contact us at alfred.laugros@atos.net.<br/>
+
+## Sponsor 
+
+This project was partially funded by <img src="/logos/feder.jpg" height="60" alt="Feder"> <img alt="Région Auvergne Rhône-Alpes" src="/logos/ara-region.jpg" height="60"> <img alt="European Union" src="/logos/UE.png" height="60">
+
